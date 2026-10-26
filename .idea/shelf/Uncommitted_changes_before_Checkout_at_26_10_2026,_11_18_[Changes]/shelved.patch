@@ -1,0 +1,11 @@
+Index: Pokebase.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>function test
+===================================================================
+diff --git a/Pokebase.js b/Pokebase.js
+--- a/Pokebase.js	(revision e2de7977ca0e57ad45fe741cdb737dc124944530)
++++ b/Pokebase.js	(date 1793009640097)
+@@ -1,1 +1,0 @@
+-function test
+\ No newline at end of file
