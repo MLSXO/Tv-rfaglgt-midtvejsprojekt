@@ -1,30 +1,85 @@
+require("dotenv").config();
+
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
 const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "", /* Dit eget password til SQL */
-    database: "pokemon",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
-app.listen(port, () => {
-    console.log(`Application is now running on port ${port}`);
-})
+app.get("/", (req, res) => {
+    res.json({
+        message: "API'et kører"
+    });
+});
 
 app.get("/pokemon-name", (req, res) => {
-    connection.query("SELECT name FROM pokemon", (error, results) => {
+    const sql = `
+        SELECT name
+        FROM pokemon
+        ORDER BY name
+    `;
+
+    connection.query(sql, (error, results) => {
         if (error) {
-            return res.status(500).send(error);
+            console.error(error);
+
+            return res.status(500).json({
+                error: "Kunne ikke hente Pokémon-navne"
+            });
         }
 
-        res.send(results);
+        res.json(results);
+    });
+});
+
+app.get("/leagues", (req, res) => {
+    const sql = `
+        SELECT
+            league_id,
+            league_name,
+            region,
+            description
+        FROM league
+        ORDER BY league_name
+    `;
+
+    connection.query(sql, (error, results) => {
+        if (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                error: "Kunne ikke hente ligaer"
+            });
+        }
+
+        res.json(results);
+    });
+});
+
+connection.connect((error) => {
+    if (error) {
+        console.error(
+            "Kunne ikke forbinde til databasen:",
+            error.message
+        );
+        process.exitCode = 1;
+        return;
+    }
+
+    console.log("Forbundet til databasen pokemon");
+
+    app.listen(port, () => {
+        console.log(`Serveren kører på http://localhost:${port}`);
     });
 });
