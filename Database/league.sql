@@ -82,3 +82,17 @@ CREATE TABLE IF NOT EXISTS battle (
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
+
+
+insert into league (league_id, league_name, challenge, description)
+('1', 'Indigo League', 'Speed', 'The classic Pokémon League of Kanto! Speed is everything here. The trainer whose Pokémon have the highest average Speed wins!'),
+('2', 'Orange League', 'HP', 'Endurance is the key to victory. The trainer whose Pokémon have the highest average HP wins!'),
+('3', 'Johto League', 'Defense', 'The legendary Johto League puts your Pokémon defenses to the test! The trainer with the highest average Defense wins!'),
+('4', 'Hoenn League', 'Attack', 'In the Hoenn region, raw power rules the battlefield! The trainer whose Pokémon have the highest average Attack wins!'),
+('5', 'Sinnoh League', 'Sp. Defense',  'Welcome to the home of Champion Cynthia! Only the toughest Pokémon can withstand powerful special attacks. The trainer with the highest average Special Defense wins!'),
+('6', 'Unova League', 'Sp. Attack', 'Unleash the hidden power of your Pokémon in the Unova League! The trainer with the highest average Special Attack wins!'),
+('7', 'Kalos League', 'Total Stats', 'Welcome to the elegant Kalos region! True champions master every skill. The trainer whose Pokémon have the highest average total stats wins!'),
+('8', 'Alola League', 'Lowest Speed',  'Aloha, trainers! On the sunny islands of Alola, patience is the secret to victory. The trainer with the lowest average Speed wins!'),
+('9', 'Galar League', 'Attack + Speed',  'Step into the massive stadiums of Galar! Victory requires both strength and speed. The trainer with the highest combined average Attack and Speed wins!'),
+('10', 'Paldea League', 'HP + Defense',  'Welcome to the Paldea Champion Assessment! Only the most resilient Pokémon will succeed. The trainer with the highest combined average HP and Defense wins!');
+
