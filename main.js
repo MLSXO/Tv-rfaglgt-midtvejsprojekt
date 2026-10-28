@@ -23,6 +23,25 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get("/pokemons", (req, res) => {
+    const sql = `
+        SELECT *
+        FROM pokemon
+    `;
+
+    connection.query(sql, (error, results) => {
+        if (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                error: "Kunne ikke hente Pokémon-navne"
+            });
+        }
+
+        res.json(results);
+    });
+});
+
 app.get("/pokemon-name", (req, res) => {
     const sql = `
         SELECT name
