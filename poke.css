@@ -8,18 +8,23 @@ body {
     flex-direction: column;
 }
 
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 header {
     background-color: #2563a6;
     border-bottom: 1px solid #FFCB05;
     border-top: 1px solid #FFCB05;
 }
 
-
 .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
 }
 
 .logo {
@@ -44,12 +49,6 @@ footer {
     padding: 1.5rem 0;
     margin-top: auto;
     border-top: 2px solid #FFCB05;
-}
-
-footer .footer {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
 }
 
 footer h2 {
