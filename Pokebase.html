@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Pokemon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokebase</title>
     <link rel="stylesheet" href="poke.css">
 </head>
+
 <body>
+
+<!-- HEADER -->
 <header>
     <div class="container header-content">
+
         <div class="header-title">
-    <img src="pokebase-logo.png" alt="Pokebase" class="logo">
+            <a href="Pokebase.html">
+                <img src="pokebase-logo.png"
+                     alt="Pokebase"
+                     class="logo">
+            </a>
         </div>
-            <nav>
-                <a href="Dashboard.html">Dashboard</a>
-                <a href="Trainer.html">Trainer overview</a>
-            </nav>
+
+        <nav>
+            <a href="Dashboard.html">Dashboard</a>
+            <a href="Trainer.html">Trainer overview</a>
+        </nav>
+
     </div>
-    <main class="container">
 </header>
 
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+    <section class="pokemon-section">
+
+        <h1>Explore Pokémon</h1>
+
+        <p>
+            Welcome to Pokebase! Explore Pokémon
+            and discover their unique stats.
+        </p>
+
+        <!-- Pokémon loaded from API -->
+        <div id="pokemon-list">
+            <p>Loading Pokémon...</p>
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
 <footer id="info">
+
     <div class="container">
-        <h2> Group/creators info</h2>
+
+        <h2>Group/creators info</h2>
+
         <div class="group">
             <ul>
                 <li>Marcus Larn Sperling</li>
@@ -30,8 +68,14 @@
                 <li>John</li>
             </ul>
         </div>
+
     </div>
-    <main class="container">
+
 </footer>
+
+
+<!-- JAVASCRIPT -->
+<script src="Pokebase.js"></script>
+
 </body>
 </html>
