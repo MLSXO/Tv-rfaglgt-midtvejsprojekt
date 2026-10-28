@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS battle (
     COLLATE = utf8mb4_0900_ai_ci;
 
 
-insert into league (league_id, league_name, challenge, description)
+insert into league (league_id, league_name, challenge, description) values
 ('1', 'Indigo League', 'Speed', 'The classic Pokémon League of Kanto! Speed is everything here. The trainer whose Pokémon have the highest average Speed wins!'),
 ('2', 'Orange League', 'HP', 'Endurance is the key to victory. The trainer whose Pokémon have the highest average HP wins!'),
 ('3', 'Johto League', 'Defense', 'The legendary Johto League puts your Pokémon defenses to the test! The trainer with the highest average Defense wins!'),
