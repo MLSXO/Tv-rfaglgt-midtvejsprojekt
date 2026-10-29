@@ -68,6 +68,7 @@ app.get("/leagues", (req, res) => {
             league_id,
             league_name,
             region,
+            challenge,
             description
         FROM league
         ORDER BY league_name
@@ -76,7 +77,6 @@ app.get("/leagues", (req, res) => {
     connection.query(sql, (error, results) => {
         if (error) {
             console.error(error);
-
             return res.status(500).json({
                 error: "Kunne ikke hente ligaer"
             });
