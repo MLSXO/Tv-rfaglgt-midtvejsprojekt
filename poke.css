@@ -123,3 +123,37 @@ footer h2 {
 footer ul {
     color: white;
 }
+
+/* POKEMON FILTERS */
+
+.pokemon-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.pokemon-filters input,
+.pokemon-filters select {
+    padding: 12px;
+    border: 2px solid #2563a6;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: white;
+}
+
+.pokemon-filters button {
+    padding: 12px 20px;
+    background-color: #FFCB05;
+    color: #2563a6;
+    border: 2px solid #2563a6;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pokemon-filters button:hover {
+    background-color: #2563a6;
+    color: white;
+}
