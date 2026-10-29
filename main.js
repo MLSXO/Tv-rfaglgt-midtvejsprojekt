@@ -42,26 +42,6 @@ app.get("/pokemons", (req, res) => {
     });
 });
 
-app.get("/pokemon-name", (req, res) => {
-    const sql = `
-        SELECT name
-        FROM pokemon
-        ORDER BY name
-    `;
-
-    connection.query(sql, (error, results) => {
-        if (error) {
-            console.error(error);
-
-            return res.status(500).json({
-                error: "Kunne ikke hente Pokémon-navne"
-            });
-        }
-
-        res.json(results);
-    });
-});
-
 app.get("/leagues", (req, res) => {
     const sql = `
         SELECT
@@ -97,6 +77,60 @@ connection.connect((error) => {
     }
 
     console.log("Forbundet til databasen pokemon");
+
+    app.get('/pokemon-name', (req, res) => {
+
+        const name = req.query.name;
+
+        connection.query(
+            'SELECT * FROM pokemon WHERE name LIKE ?',
+            ['%' + name + '%'],
+            (error, results) => {
+
+                if (error) {
+                    return res.status(500).send(error);
+                }
+
+                res.send(results);
+            }
+        );
+    });
+
+    app.get('/pokemon-type', (req, res) => {
+
+        const type = req.query.type;
+
+        connection.query(
+            'SELECT * FROM pokemon WHERE primary_type = ? OR secondary_type = ?',
+            [type, type],
+            (error, results) => {
+
+                if (error) {
+                    return res.status(500).send(error);
+                }
+
+                res.send(results);
+            }
+        );
+    });
+
+    app.get('/pokemon-attack', (req, res) => {
+
+        const attack = req.query.attack;
+
+        connection.query(
+            'SELECT * FROM pokemon WHERE attack >= ? ORDER BY attack DESC',
+            [attack],
+            (error, results) => {
+
+                if (error) {
+                    return res.status(500).send(error);
+                }
+
+                res.send(results);
+            }
+        );
+    });
 
     app.listen(port, () => {
         console.log(`Serveren kører på http://localhost:${port}`);
