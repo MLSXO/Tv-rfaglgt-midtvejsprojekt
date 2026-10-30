@@ -17,24 +17,55 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
+
+// TEST API
+
 app.get("/", (req, res) => {
     res.json({
         message: "API'et kører"
     });
 });
 
+
+// GET ALL POKEMON + FILTERS
+
 app.get("/pokemons", (req, res) => {
-    const sql = `
-        SELECT *
-        FROM pokemon
-    `;
 
-    connection.query(sql, (error, results) => {
+    const name = req.query.name || "";
+    const type = req.query.type || "";
+    const minAttack = req.query.minAttack;
+
+    // Check minimum Attack
+    if (minAttack !== undefined) {
+
+        if (minAttack === "" ||
+            !Number.isFinite(Number(minAttack)) ||
+            Number(minAttack) < 0) {
+
+            return res.status(400).json({
+                error: "Minimum Attack must be a valid number"
+            });
+        }
+    }
+
+    const sql = `SELECT * FROM pokemon WHERE name LIKE ? AND (? = '' OR primary_type = ? OR secondary_type = ?)
+        AND attack >= ? ORDER BY pokedex_number`;
+
+    const values = [
+        "%" + name + "%",
+        type,
+        type,
+        type,
+        minAttack === undefined ? 0 : Number(minAttack)
+    ];
+
+    connection.query(sql, values, (error, results) => {
+
         if (error) {
             console.error(error);
 
             return res.status(500).json({
-                error: "Kunne ikke hente Pokémon-navne"
+                error: "Kunne ikke hente Pokémon"
             });
         }
 
@@ -42,38 +73,15 @@ app.get("/pokemons", (req, res) => {
     });
 });
 
-app.get("/pokemon-name", (req, res) => {
-    const sql = `
-        SELECT name
-        FROM pokemon
-        ORDER BY name
-    `;
 
-    connection.query(sql, (error, results) => {
-        if (error) {
-            console.error(error);
-
-            return res.status(500).json({
-                error: "Kunne ikke hente Pokémon-navne"
-            });
-        }
-
-        res.json(results);
-    });
-});
+// GET LEAGUES
 
 app.get("/leagues", (req, res) => {
-    const sql = `
-        SELECT
-            league_id,
-            league_name,
-            region,
-            description
-        FROM league
-        ORDER BY league_name
-    `;
+
+    const sql = `SELECT league_id, league_name, region, description FROM league ORDER BY league_name`;
 
     connection.query(sql, (error, results) => {
+
         if (error) {
             console.error(error);
 
@@ -86,12 +94,18 @@ app.get("/leagues", (req, res) => {
     });
 });
 
+
+// DATABASE CONNECTION
+
 connection.connect((error) => {
+
     if (error) {
+
         console.error(
             "Kunne ikke forbinde til databasen:",
             error.message
         );
+
         process.exitCode = 1;
         return;
     }
