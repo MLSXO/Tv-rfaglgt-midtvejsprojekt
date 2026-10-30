@@ -79,26 +79,21 @@ document.getElementById("searchButton").addEventListener("click", function () {
     const type = document.getElementById("pokemonType").value;
     const attack = document.getElementById("minAttack").value;
 
-    let url = "http://localhost:3000/pokemons";
+    const params = new URLSearchParams();
 
     if (name !== "") {
-
-        url = "http://localhost:3000/pokemon-name?name="
-            + encodeURIComponent(name);
-
-    } else if (type !== "") {
-
-        url = "http://localhost:3000/pokemon-type?type="
-            + encodeURIComponent(type);
-
-    } else if (attack !== "") {
-
-        url = "http://localhost:3000/pokemon-attack?attack="
-            + encodeURIComponent(attack);
-
+        params.append("name", name);
     }
 
-    getPokemon(url);
+    if (type !== "") {
+        params.append("type", type);
+    }
+
+    if (attack !== "") {
+        params.append("minAttack", attack);
+    }
+
+    getPokemon("http://localhost:3000/pokemons?" + params.toString());
 
 });
 
